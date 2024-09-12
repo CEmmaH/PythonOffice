@@ -1,5 +1,3 @@
-from fileinput import filename
-from operator import index
 
 import pandas as pd
 from pathlib import Path
@@ -36,7 +34,7 @@ def mergefiles(output_file:str):
         print("No files were read. No output file was created.")
 
 def merge_files_by_name(output_file: str, *files: str):
-    print("Merge files ...")
+    print("Found files by name...")
     for file in files:
         print(file)
     dfs = []
@@ -45,7 +43,8 @@ def merge_files_by_name(output_file: str, *files: str):
             df = pd.read_excel(file)
             dfs.append(df)
         except Exception as e:
-            print("Error reading {file}:{e}")
+            print(f"Error reading {file}:{e}")
+            return
 
     if dfs:
         print("Concatenating DataFrames...")
